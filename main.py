@@ -76,36 +76,28 @@ def calculate_page_rank(b=0.85, d=0.001, max_iter=20):
       new_sum_err += abs(my_rank_dict[key][1] - my_rank_dict[key][0])
     delta = new_sum_err
 
+  for node in my_rank_dict.keys():
+    my_rank_list.append((node, my_rank_dict[node][1]))
 
-
-
-
-
-
-
-
-
-
-
-
-  return
-
+  my_rank_list.sort(key= lambda x: x[1],reverse= True)
 
 def get_PageRank(node_name):
   if node_name in my_rank_dict.keys():
-    return my_rank_dict[node_name]
+    return my_rank_dict[node_name][1]
   else:
     return -1
+
 def get_top_PageRank(n):
   if len(my_dict.keys()) > 0:
-    # ***complete***
-    return
+    return my_rank_list[:n]
+
   else:
     return []
+
 def get_all_PageRank():
   if len(my_dict.keys()) > 0:
-    # ***complete***
-    return
+
+    return my_rank_list
   else:
     return []
 
@@ -114,6 +106,11 @@ def get_all_PageRank():
 
 load_graph('soc-sign-bitcoinotc.csv')
 calculate_page_rank(b=0.85, d=0.001, max_iter=20)
-print(my_rank_dict)
+print(type(my_rank_dict[5724][1]))
+print(get_top_PageRank(6))
+# print("===========")
+#print(get_all_PageRank())
+# print("===========")
+# print(get_PageRank(5724))
 
 
