@@ -64,17 +64,27 @@ def calculate_page_rank(b=0.85, d=0.001, max_iter=20):
     for key in my_dict.keys():
 
       new_rank = 0
+      sum_rank = 0
       if len(my_dict[key]["in"]) != 0:
         for income_edge in my_dict[key]["in"]:
           rank_mone = (b * income_edge[1] * my_rank_dict[income_edge[0]][0])
           rank_mehane = my_dict[income_edge[0]].get("sum")
           new_rank += rank_mone/rank_mehane
       my_rank_dict[key].append(new_rank)
+      sum_rank+=new_rank
       len1= len(my_rank_dict[key])
       #make sure we always have list of 2
       my_rank_dict[key] = my_rank_dict[key][len1-2:len1]
+      #new_sum_err += abs(my_rank_dict[key][1] - my_rank_dict[key][0])
+
+    #fix of the lake
+    fix_to_append = (1-sum_rank)/len(my_dict.keys())
+    for key in my_rank_dict.keys():
+      my_rank_dict[key][1]+=fix_to_append
       new_sum_err += abs(my_rank_dict[key][1] - my_rank_dict[key][0])
     delta = new_sum_err
+    iters +=1
+
 
   for node in my_rank_dict.keys():
     my_rank_list.append((node, my_rank_dict[node][1]))
