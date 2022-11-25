@@ -61,10 +61,10 @@ def calculate_page_rank(b=0.85, d=0.001, max_iter=20):
   while (iters < max_iter and delta > d ):
 
     new_sum_err = 0
+    sum_rank = 0
     for key in my_dict.keys():
 
       new_rank = 0
-      sum_rank = 0
       if len(my_dict[key]["in"]) != 0:
         for income_edge in my_dict[key]["in"]:
           rank_mone = (b * income_edge[1] * my_rank_dict[income_edge[0]][0])
@@ -115,9 +115,13 @@ def get_all_PageRank():
 # ====  TESTS ======
 
 load_graph('soc-sign-bitcoinotc.csv')
-calculate_page_rank(b=0.85, d=0.001, max_iter=20)
-print(type(my_rank_dict[5724][1]))
-print(get_top_PageRank(6))
+calculate_page_rank()
+#print(type(my_rank_dict[5724][1]))
+top_ten = get_top_PageRank(10)
+index=1
+for rank in top_ten:
+  print(str(index)+". "+str(rank))
+  index+=1
 # print("===========")
 #print(get_all_PageRank())
 # print("===========")
