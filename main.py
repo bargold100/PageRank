@@ -112,19 +112,4 @@ def get_all_PageRank():
     return []
 
 
-# ====  TESTS ======
-
-load_graph('soc-sign-bitcoinotc.csv')
-calculate_page_rank()
-#print(type(my_rank_dict[5724][1]))
-top_ten = get_top_PageRank(10)
-index=1
-for rank in top_ten:
-  print(str(index)+". "+str(rank))
-  index+=1
-# print("===========")
-#print(get_all_PageRank())
-# print("===========")
-# print(get_PageRank(5724))
-
 
